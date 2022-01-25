@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+    <script>
+    $(function() {
+      $( "#datepicker" ).datepicker({
+        appendText: "",
+        dateFormat: 'yy/mm/dd',
+        changeMonth: true,
+        changeYear: true,
+        onSelect: function(date) {
+            //當下時間
+            let date_today=new Date();
+            //指定收件日
+            let date_end =$("#datepicker").datepicker("getDate");
+            //工作天數
+            let date_work = 5;
+            //基礎工作天數
+            let date_range=parseInt((date_end - date_today)/1000/60/60/24,10)+2;
+            //星期文字陣列
+            let weekday=["星期日","星期一","星期二","星期三","星期四","星期五","星期六"];
+            
+            if (Math.floor(date_range/7) > 0) {    //申請區間超過7天，扣除禮拜天(非工作天)
+                date_range=date_range-(Math.floor(date_range/7));
+            }
+            if (date_today.getHours() >= 21) { //如果超過晚上9點，實際工作天數-1
+                date_range--;
+                if ((date_today.getDay() != 1)) { //非星期一，實際工作天數-1(跨星期日)
+                    date_range--;
+                }
+            }else{  //沒有超過9點，不動實際工作天數
+                if ((date_today.getDay() != 1) || (date_today.getDay() != 2)) { //非星期一or星期二申印，實際工作天數-1(跨星期日)
+                    date_range--;
+                }
+            }
+
+            //測試區
+            console.log(date_end);
+            console.log(date_today);
+            // console.log(weekday[date_today.getDay()]);
+            // console.log(weekday[date_end.getDay()]);
+            console.log("工作天:"+date_range);
+        }
+      });
+    });
+    </script>
+</head>
+<body>
+    <p>Date: <input type="text" id="datepicker" readonly></p>
+</body>
+</html>
