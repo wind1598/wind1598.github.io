@@ -44,9 +44,9 @@ a:hover{
 .banner img{
   /* background-color: grey;
   height: 100px; */
-  width: 100%;
+  /* width: 100%;
   height: auto;
-  margin: 0 auto;
+  margin: 0 auto; */
 }
 
 /* 曙光據點、服務成果(人數) */
@@ -163,6 +163,13 @@ a:hover{
   .testInformation .testDate > div{
     font-size: var(--fontSizeVminPc);
   }
+}
+
+/* 榜單、影音專區共用 */
+body.home .carousel__slide{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* 榜單專區 */
