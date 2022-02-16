@@ -1,6 +1,15 @@
+/* 主要色系：
+  1.淺藍色（16進制）#D4EBFF
+  2.深藍色（16進制）#2E3192
+  3.黃橘色（16進制）#F47851
+  4.皮膚色（16進制）#FFE7E1
+ */
+
 :root{
-  --lightBlue :#d4eaff;
-  --darkBlue:#4679dc; /* (倒數天數、顯眼文字) */
+  --lightBlue :#D4EBFF;
+  --darkBlue:#2E3192;
+  --orange:#F47851;
+  --skin:#FFE7E1;
   --fontSizeVmin: 4vmin; /* 手機板可視文字的大小百分比 */
   --fontSizeVminPc: 2.8vmin; /* 電腦版可視文字的大小百分比 */
   --fontWeightLight:300;
@@ -14,10 +23,8 @@
   font-weight: var(--fontWeightMedium);
 }
 
-.row{
+.digital{
   max-width: 1300px;
-  margin: 0 auto;
-  justify-content: center;
 }
 
 /* 預設超連結文字為黑色，hover也是 */
@@ -41,16 +48,77 @@ a:hover{
   margin: 0 auto;
   margin-top: 80px;
 }
-.banner img{
+/* .banner img{ */
   /* background-color: grey;
   height: 100px; */
   /* width: 100%;
   height: auto;
   margin: 0 auto; */
-}
+/* } */
 
 /* 曙光據點、服務成果(人數) */
-.digital > div{
+.digital{
+  padding-top: 1rem;
+  margin: 0 auto;
+  justify-content: center;
+}
+.digital .historyDigital,
+.digital .numberOfPeople{
+  padding-top: 2rem;
+  flex-wrap: nowrap;
+}
+.digital div{
+    display: flex;
+    justify-content: center;
+    align-items:flex-end;
+    color:var(--darkBlue);
+}
+.digital .since>div,
+.digital .salesPoints>div,
+.digital .elementary>div,
+.digital .juniorHigh>div,
+.digital .seniorHigh>div{
+    flex-direction: column;
+}
+.digital .since>div{
+    align-items:flex-start;
+}
+.digital .h2{
+    margin-bottom: 0;
+}
+.digital .point{
+  font-size: 1.5rem;
+  letter-spacing: 0.5rem;
+  align-self: center;
+}
+/* 跳動感 */
+@media (min-width:768px) {
+  .digital .since,
+  .digital .elementary,
+  .digital .seniorHigh{
+    padding-bottom: 50px;
+  }
+  .digital .salesPoints,
+  .digital .juniorHigh{
+    padding-top: 50px;
+  }
+}
+
+/* 右邊點點的出現時機(PC/mobile) */
+.digital .pointPC{ /* 手機版型要隱藏 */
+  display: none; 
+}
+@media (min-width:768px) {
+  .digital .pointPC{ /* 電腦版型要顯示 */
+      display: flex;
+  }    
+  .digital .pointMobile{ /* 電腦版型要隱藏 */
+      display: none;
+  }
+}
+
+
+/* .digital > div{
   padding-left: 0;
   padding-right: 0;
 }
@@ -89,7 +157,7 @@ a:hover{
   .numberOfPeople > div > div{
     font-size: var(--fontSizeVminPc);
   }
-}
+} */
 
 /* title格式設定 */
 .title{

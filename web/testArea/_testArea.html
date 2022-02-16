@@ -7,153 +7,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
 
-    <style>
-        *{
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        #app {
-            height: 100%;
-            font-size: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-flow: wrap-reverse;
-        }
-
-        .box {  /* 整個格子 */
-            position: relative;
-            box-sizing: border-box;
-            margin: 5px;
-        }
-
-        .box .child { /* 翻動的牌子 */
-            width: 130px;
-            height: 100px;
-            overflow: hidden;
-        }
-
-        .box>.top { /* 上方牌子(固定) */
-            background-color: #333;
-            line-height: 200px;
-            border-bottom: 2px solid #fff;
-            border-radius: 4px 4px 0 0;
-        }
-
-        .box .flip { /* 翻動的中心線 */
-            position: absolute;
-            top: 0px;
-            z-index: 1;
-            transform-origin: bottom;
-            border-radius: 4px 4px 0 0;
-        }
-
-        .box .flip .flip_face { /* 上方牌子(翻動) */
-            position: absolute;
-            background-color: #333;
-            line-height: 200px;
-            z-index: 1;
-            border-bottom: 2px solid #fff;
-        }
-
-        .box .flip .flip_back { /* 下方牌子(翻動) */
-            position: absolute;
-            background-color: #333;
-            line-height: 0px;
-            transform: perspective(500px) rotateX(0deg) rotateY(-180deg) rotate(180deg);
-            border-top: 2px solid #fff;
-        }
-
-        .box .bottom { /* 下方牌子(固定) */
-            background-color: #333;
-            line-height: 0px;
-            border-top: 2px solid #fff;
-            border-radius: 0 0 4px 4px;
-        }
-
-        .text { /* 數字 */
-            text-align: center;
-            font-size: 100px;
-            font-weight: 900;
-            color: #fff;
-        }
-    </style>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
+    
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;500;700&display=swap" rel="stylesheet">
+    
+    <!-- myCSS/JS -->
+    <link rel="stylesheet" href="/web/css/myStyle.css?20220215"/>
+    <script src="/web/js/myJavascript.js?20220215"></script>
 </head>
 
 <body>
-    <div id="app">
-        <div class="box" id="box_minute">
-            <div class="top child text" id="top">0</div>
-            <div class="flip child" id="flip">
-                <div class="flip_face child text" id="flip_face">0</div>
-                <div class="flip_back child text" id="flip_back">0</div>
+    <!-- 課程介紹、考情資訊 -->
+    <div class="subject row">
+        <div class="grade col">
+            <div class="title"> 課程介紹 </div>
+            <a href="subject_elementary.php" class="">國小</a>
+            <a href="subject_junior.php" class="">國中</a>
+            <a href="subject_senior.php" class="">高中</a>
+            <a href="subject_tutorial.php" class="">柏克個別指導</a>
+            <a href="subject_language.php" class="">多益/全民英檢<br>歐語制英文</a>
+            <a href="subject_studyCenter.php" class="">K書中心</a>
+        </div>
+        <div class="testInformation col">
+            <div class="title"> 重要考試倒計時 </div>
+            <div class="testDate CAP">
+                <div>國中會考<br>剩123天</div>
             </div>
-            <div class="bottom child text" id="bottom">0</div>
+            <div class="testDate GSAT">
+                <div>高中學測<br>剩254天</div>
+            </div>
+            <div class="testDate AST">
+                <div>分科測驗<br>剩300天</div>
+            </div>
+            <div class="testDate GEPT_primary">
+                <div>英檢初級初試(聽讀)<br>剩28天</div>
+            </div>
+            <div class="testDate GEPT_intermediate">
+                <div>英檢中級初試(聽讀)<br>剩54天</div>
+            </div>
         </div>
     </div>
 
-    <script>
-        // 获取Dom
-        const box_minute = document.querySelector("#box_minute");
-        const Top = box_minute.querySelector("#top");
-        const flip = box_minute.querySelector("#flip");
-        const flipFace = flip.querySelector("#flip_face");
-        const flipBack = flip.querySelector("#flip_back");
-        const Bottom = box_minute.querySelector("#bottom");
-        let timer = null, timerTwo = null;
-
-        const OneCycle = (n, timer) => { // 一次翻页的周期
-            let num = 0;
-            flipFace.style.zIndex = 1;
-            flipBack.style.zIndex = 0;
-            flip.style.transform = "perspective(500px) rotateX(0deg)"; // rotateX(0deg) => rotateX(-180deg)
-            flipFace.innerHTML = n;
-            Bottom.innerHTML = n;
-
-            timer = setInterval(() => {
-                num++;
-                if (num > 50) {
-                clearInterval(timer);
-                return;
-                };
-
-                if (num === 1) {
-                Top.innerHTML = (n + 1) === 60 ? 0 : (n + 1); // 60 和 0 在时间里，其实是一样的
-                flipBack.innerHTML = (n + 1) === 60 ? 0 : (n + 1);
-                }
-
-                if (num <= 25) {
-                flipFace.style.zIndex = 1;
-                flipBack.style.zIndex = 0;
-                } else {
-                flipFace.style.zIndex = 0;
-                flipBack.style.zIndex = 1;
-                }
-                // console.log(num); // 1 ~ 50
-                flip.style.transform = `perspective(500px) rotateX(-${180 * num / 50}deg)`
-            }, 20); // 将一秒钟分成50份。
-        };
-
-        const cycle = () => {
-            timerTwo = setInterval(() => {
-                let num = new Date().getSeconds();
-                OneCycle(num, timer);
-            }, 1000);
-        };
-
-        cycle();
-
-        // 浏览器页面切换时，定时器setInterval抖动问题
-        document.onvisibilitychange = function () {
-            if (document.visibilityState === "visible") {
-                cycle();
-            } else {
-                clearInterval(timer);
-                clearInterval(timerTwo);
-            }
-        }
-
-    </script>
 </body>
 </html>

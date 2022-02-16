@@ -76,30 +76,58 @@
 			</div> -->
 
 			<!-- 曙光據點、服務成果(人數) -->
-			<div class="digital row padding_3">
+			<div class="digital row">
 				<div class="historyDigital col-md-5 row">
+					<div class="point col">
+						●
+						<div style="color: #D4EBFF;">●</div>
+					</div>
 					<div class="since col">
-						<div>  創始86年  </div>
+						<div>
+							<div>創立</div>
+							<div><div class="h2">86</div>年</div>
+						</div>
 					</div>
 					<div class="salesPoints col">
-						<div>  18間據點  </div>
+						<div>
+							<div><div class="h2">18</div>間</div>
+							<div>據點</div>
+						</div>
+					</div>
+					<div class="point pointMobile col">
+						<div style="color: #D4EBFF;">●</div>
+						●
 					</div>
 				</div>
-				<div class="numberOfPeople col-md-7 row">
+
+				<div class="numberOfPeople col-md row">
 					<div class="elementary col">
-						<div>考上衛曉明<br>3123人</div>
+						<div>
+							<div>考上衛曉明</div>
+							<div><div class="h2">3123</div>人</div>
+						</div>
 					</div>
 					<div class="juniorHigh col">
-						<div>5A10+菁英<br>2456人</div>	
+						<div>
+							<div>5A10+菁英</div>
+							<div><div class="h2">2456</div>人</div>
+						</div>
 					</div>
 					<div class="seniorHigh col">
-						<div>台清交成醫<br>1789人</div>	
+						<div>
+							<div>台清交成醫</div>
+							<div><div class="h2">1789</div>人</div>	
+						</div>
+					</div>
+					<div class="point pointPC col">
+						<div style="color: #D4EBFF;">●</div>
+						●
 					</div>
 				</div>
 			</div>
 			
 			<!-- 課程介紹、考情資訊 -->
-			<div class="subject row padding_3">
+			<div class="subject row">
 				<div class="grade col">
 					<div class="title"> 課程介紹 </div>
 					<a href="subject_elementary.php" class="">國小</a>
@@ -177,6 +205,12 @@
 		<?php include("_footer.html");?>
 		<script>
 			AOS.init();
+
+			//取得要數字跳動的Dom
+			let h2List=document.querySelectorAll(".digital .h2");
+			for (let index = 0; index < h2List.length; index++) {   //所有Dom執行動畫
+				numCountAdd(h2List[index]);
+			}
 		</script>
 	</body>
 </html>
