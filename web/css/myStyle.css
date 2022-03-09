@@ -1,20 +1,22 @@
-/* 主要色系：
-  1.淺藍色（16進制）#D4EBFF
-  2.深藍色（16進制）#2E3192
-  3.黃橘色（16進制）#F47851
-  4.皮膚色（16進制）#FFE7E1
- */
 
 :root{
-  --lightBlue :#D4EBFF;
-  --darkBlue:#2E3192;
-  --orange:#F47851;
-  --skin:#FFE7E1;
-  --fontSizeVmin: 4vmin; /* 手機板可視文字的大小百分比 */
-  --fontSizeVminPc: 2.8vmin; /* 電腦版可視文字的大小百分比 */
+  /* 主要色系 */
+  --darkBlue:#2E3192;   /* 淺藍色 */
+  --lightBlue :#D4EBFF; /* 深藍色 */
+  --orange:#F47851;     /* 黃橘色 */
+  --skin:#FFE7E1;       /* 皮膚色 */
+
+  /* 字重 */
   --fontWeightLight:300;
   --fontWeightMedium:500;
   --fontWeightBold:700;
+  
+  /*內容顯示的最大寬度*/
+  --ViewMaxWidth:1300px;
+
+  /* 待確認是否需要使用 */
+  --fontSizeVmin: 4vmin; /* 手機板可視文字的大小百分比 */
+  --fontSizeVminPc: 2.8vmin; /* 電腦版可視文字的大小百分比 */
 }
 
 *{ 
@@ -23,20 +25,70 @@
   font-weight: var(--fontWeightMedium);
 }
 
-.digital{
-  max-width: 1300px;
-}
-
 /* 預設超連結文字為黑色，hover也是 */
 a,
 a:hover{
   color: black;
 }
 
-.padding_3{ /* 主任要求左右版面留空 */
-  padding: 0 3%;
-}
 /* 上面為全站規則 */
+
+/* 抬頭的h系列，拿掉margin-bottom */
+.digital .h2,
+.subject .h2,
+.subject .h6,
+.branches .h2,
+.branches .h5,
+.branches .h6{
+  margin-bottom: 0px;
+}
+
+/* 限制最大寬度 */
+.digital,
+.grade,
+.testInformation,
+.branches{
+  max-width: var(--ViewMaxWidth);
+  position: relative;
+  padding-top: 1rem;
+  margin: 0 5%;
+  justify-content: center;
+}
+
+/* 左上角三角形 */
+.subject .gradeTitle::before,
+.subject .testInformationTitle::before,
+.branches .branchesTitle::before{
+  content: "";
+  position: absolute;
+  top: 1.5rem;
+  left: 0;
+  display: block;
+  border-style: solid;
+  border-width: 15px;
+  border-color: var(--darkBlue) transparent transparent var(--darkBlue);
+}
+.subject .testInformationTitle::before{
+  border-color: var(--orange) transparent transparent var(--orange);
+}
+
+/* 抬頭設定 */
+.subject .gradeTitle,
+.subject .testInformationTitle,
+.branches .branchesTitle{
+  align-items: flex-end;
+  margin: 0 auto;
+  padding-top: 2rem;
+  color: var(--darkBlue);
+}
+.subject .testInformationTitle{
+  color: var(--orange);
+}
+/* mark大小 */
+.subject .markToSVG img,
+.branches .markToSVG img{
+  width: 3rem;
+}
 
 .newsTicker{
   background: var(--lightBlue);
@@ -57,11 +109,6 @@ a:hover{
 /* } */
 
 /* 曙光據點、服務成果(人數) */
-.digital{
-  padding-top: 1rem;
-  margin: 0 auto;
-  justify-content: center;
-}
 .digital .historyDigital,
 .digital .numberOfPeople{
   padding-top: 2rem;
@@ -83,15 +130,12 @@ a:hover{
 .digital .since>div{
     align-items:flex-start;
 }
-.digital .h2{
-    margin-bottom: 0;
-}
 .digital .point{
   font-size: 1.5rem;
   letter-spacing: 0.5rem;
   align-self: center;
 }
-/* 跳動感 */
+/* 跳動感(錯位) in PC */
 @media (min-width:768px) {
   .digital .since,
   .digital .elementary,
@@ -103,7 +147,6 @@ a:hover{
     padding-top: 50px;
   }
 }
-
 /* 右邊點點的出現時機(PC/mobile) */
 .digital .pointPC{ /* 手機版型要隱藏 */
   display: none; 
@@ -117,47 +160,63 @@ a:hover{
   }
 }
 
+/* 課程資訊、大考日程 */
 
-/* .digital > div{
-  padding-left: 0;
-  padding-right: 0;
+/* 輪播圖間距 */
+.subject .gradeCarousel a{
+  margin: auto 1rem;
+  margin-top: 2rem;
+  padding: 0;
 }
-@media (max-width:767.98px) {
-  .digital > div{
-    margin-top:3%;
-  }
-}
-
-.historyDigital > div{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.historyDigital > div > div{
+/* 輪播圖文字外框 */
+.subject .gradeCarousel .carousel__slide div{
+  margin-top: 2rem;
+  padding: 10px 0;
   color: var(--darkBlue);
-  font-size: var(--fontSizeVmin);
-  white-space: pre;
-  border:1px #dae0e5 solid;
-  border-radius: 12px;
-  box-shadow: 3px 3px 1px var(--darkBlue), -1px -1px 1px #dae0e5;
-}
-@media (min-width:768px) {
-  .historyDigital > div > div{
-    font-size: var(--fontSizeVminPc);
-  }
-}
-
-.numberOfPeople > div > div{
-  color: var(--darkBlue);
-  font-size: var(--fontSizeVmin);
+  font-weight: 300;
+  border: var(--darkBlue) 2px solid;
+  border-radius: 10rem;
   text-align: center;
 }
-@media (min-width:768px) {
-  .numberOfPeople > div > div{
-    font-size: var(--fontSizeVminPc);
-  }
-} */
+.subject .testInformation .carousel__slide{
+  border-radius: 20px 0 20px 20px;
+  box-shadow: 2px 2px 4px gray;
+  margin: 2rem 1rem;
+  padding: 1rem;
+  color: var(--orange);
+  font-size: 2rem;
+}
+.subject .testInformation .carousel__slide > div:last-child::after{
+  content: "天";
+  font-size: 1.5rem;
+}
+.subject .testInformation .carousel__slide > div:last-child{
+  font-size: 3rem;
+}
+.subject .testInformation .carousel__slide > div{
+  text-align: center;
+}
+.subject .testInformation .carousel__slide > div:first-child::before{
+  /* 右上角三角形 */
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: block;
+  border-style: solid;
+  border-width: 15px;
+  border-color: var(--orange) var(--orange) transparent transparent;
+}
+.subject .testDate .name{
+  border-bottom: 1px var(--orange) solid;
+  padding: 1rem 0;
+  font-weight: 700;
+}
+.subject .testDate .name + div{
+  font-size: 1.5rem;
+  font-weight: 300;
+  margin: 0.5rem;
+}
 
 /* title格式設定 */
 .title{
@@ -168,7 +227,8 @@ a:hover{
   white-space: pre;
   max-height: 45px;
 }
-.title::before,.title::after{
+/* 兩邊劃線 */
+.title::before,.title::after{ 
   content: "";
   position: relative;
   border-top: 6px double gray;
@@ -180,8 +240,87 @@ a:hover{
   }
 }
 
+.branches,
+.branches .school a,
+.branches .showSchoolPicture i{
+  color: var(--darkBlue);
+}
+.branches .branchesTitle.row{
+  justify-content:space-around;
+}
+.branches .nameCH br{
+  display: none;
+}
+.branches .choose > div{
+  justify-content: space-around;
+}
+.branches .brand{
+  margin-top:2.5rem;
+}
+.branches .brand div{
+  font-weight: var(--fontWeightBold);
+  color:  var(--darkBlue);
+}
+.branches .brand > div{
+  text-decoration: none;
+  background-image: linear-gradient(#00174d, #00174d);
+  background-position: left bottom;
+  background-size: 0 2.5px;
+  background-repeat: no-repeat;
+  transition: background-size 0.15s;
+}
+
+.branches .school,
+.branches .school > div{
+  margin: 1rem auto;
+  justify-content: space-around;
+    
+}
+.branches .school .col-md > div{
+  border: 1px var(--darkBlue) solid;
+  border-radius: 20px;
+  padding: 0.5rem;
+}
+.branches .school a > div{
+  padding: 0 0.9rem;
+}
+.branches .showSchoolBranch > div >:last-child{
+  margin: 1rem 0.5rem;
+}
+.branches .showSchoolBranch div[class^=_] > div{
+  font-weight: var(--fontWeightLight);
+  color: black;
+}
+.branches .showSchoolBranch div[class^=_] > div::before{
+  content: "●";
+  color: var(--lightBlue);
+  font-size: 0.3rem;
+  margin-right: 0.5rem;
+}
+.branches .showSchoolPicture > div .col-md{
+  background: var(--lightBlue);
+  text-align: center;
+  Letter-spacing: 0.5rem;
+}
+@media (min-width:768px) {
+  .branches .branchesTitle.row{
+    flex-direction: column;
+    align-items: center;
+  }
+  .branches .nameCH br{
+    display: block;
+  }
+}
+
+
+.branches .school > .col-md{
+  padding-left: 0;
+  padding-right: 0;
+}
+
+
 /* 課程介紹、考情資訊 */
-.subject a{
+/* .subject a{
   background-color: var(--lightBlue);
   border: 0.3vmin #fff solid;
   border-radius: 12px;
@@ -198,9 +337,9 @@ a:hover{
     font-size: var(--fontSizeVminPc);
     height: 9vmin;
   }
-}
+} */
 
-.testInformation{
+/* .testInformation{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -214,31 +353,32 @@ a:hover{
 
 .testInformation .testDate > div{
   color: white;
-  /* font-weight: 500; */
   font-size: var(--fontSizeVmin);  
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  /* 變圓形的設定 */
-  /* border-radius: 999em;
-  width: 100%;
-  height: 0;
-  padding-top: 50%;
-  padding-bottom: 50%; */
 }
 @media (min-width:768px) {
   .testInformation .testDate > div{
     font-size: var(--fontSizeVminPc);
   }
-}
+} */
+
+/* 變圓形的設定 */
+/* border-radius: 999em;
+width: 100%;
+height: 0;
+padding-top: 50%;
+padding-bottom: 50%; */
 
 /* 榜單、影音專區共用 */
-body.home .carousel__slide{
+/* 會影響其他，另外處理 */
+/* body.home .carousel__slide{
   display: flex;
   flex-direction: column;
   align-items: center;
-}
+} */
 
 /* 榜單專區 */
 [data-fancybox="indexHonorRolls"]{
@@ -259,10 +399,14 @@ body.home .carousel__slide{
 
 /* 榜單、影音輪播左右按鈕設定 */
 .carousel{
-  --carousel-button-bg: var(--lightBlue);
-  --carousel-button-width: 38px;
-  --carousel-button-height: 38px;
+  --carousel-button-bg: var(--darkBlue);
+  --carousel-button-width: 36px;
+  --carousel-button-height: 36px;
   --carousel-button-svg-stroke-width: 3;
+  color: #FFFFFF;
+}
+.testInformation .carousel{
+  --carousel-button-bg: var(--orange);
 }
 
 /* ----------video.php start----------*/
